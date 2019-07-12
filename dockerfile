@@ -12,7 +12,7 @@ COPY docker /docker
 RUN chmod +x /docker/install_python.sh
 RUN /docker/install_python.sh
 
-RUN python3.6 -m pip install --no-cache-dir --upgrade pip
+RUN python3.6 -m pip install --no-cache-dir --upgrade pip setuptools
 RUN python3.6 -m pip install --no-cache-dir fastapi gunicorn uvicorn ujson
 
 RUN mkdir -p /models/model
