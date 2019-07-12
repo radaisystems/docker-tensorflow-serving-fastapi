@@ -7,7 +7,7 @@ if cat /etc/os-release | grep -q 16\.04; then
   apt-get install -y software-properties-common
   add-apt-repository ppa:deadsnakes/ppa
   apt-get update
-  apt-get -y install --no-install-recommends python3.6 python3.6-dev python3-pip build-essential libssl-dev libffi-dev
+  apt-get -y install --no-install-recommends python3.6 python3.6-dev python3-pip python3-setuptools build-essential libssl-dev libffi-dev
   ln /usr/bin/python3.6 /usr/local/bin/python3
 else
   # Modern Ubuntu images install more recent python versions.
