@@ -1,0 +1,14 @@
+version: '3'
+services:
+  tfs:
+    build:
+      context: ./
+      dockerfile: ./dockerfile
+      args:
+        TFS_VERSION: latest
+    ports:
+      - "8500:8500"
+      - "8501:8501"
+      - "8080:8080"
+    #volumes:
+    #  - ./build/models:/models

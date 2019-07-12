@@ -1,0 +1,321 @@
+version: 2.1
+
+executors:
+  default-executor:
+    docker:
+      - image: circleci/ruby:2.5.1-node-browsers
+
+commands:
+  build_continer:
+    description: "Build a new container."
+    parameters:
+      tfs_version:
+        type: string
+        default: latest
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: docker build -t tfs-fastpi:<< parameters.tfs_version >> --build-arg TFS_VERSION=<< parameters.tfs_version >> --progress plain -f dockerfile .
+
+  publish_continer:
+    description: "Build a new container."
+    parameters:
+      tfs_version:
+        type: string
+        default: latest
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: docker build -t radaisystems/tfs-fastpi:<< parameters.tfs_version >> --build-arg TFS_VERSION=<< parameters.tfs_version >> --progress plain -f dockerfile .
+      - run: |
+          echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+          docker push radaisystems/tfs-fastpi:<< parameters.tfs_version >>
+
+
+jobs:
+  build_latest:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: latest
+
+  build_latest_devel:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: latest-devel
+
+  build_latest_gpu:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: latest-gpu
+
+  build_latest_devel_gpu:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: latest-devel-gpu
+
+  build_1_14:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: 1.14.0
+
+  build_1_14_devel:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: 1.14.0-devel
+
+  build_1_14_gpu:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: 1.14.0-gpu
+
+  build_1_14_devel_gpu:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: 1.14.0-devel-gpu
+
+  build_1_13:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: 1.13.0
+
+  build_1_13_devel:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: 1.13.0-devel
+
+  build_1_13_gpu:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: 1.13.0-gpu
+
+  build_1_13_devel_gpu:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: 1.13.0-devel-gpu
+
+  publish_latest:
+    executor: default-executor
+    steps:
+      - publish_continer:
+          tfs_version: latest
+
+  publish_latest_devel:
+    executor: default-executor
+    steps:
+      - publish_continer:
+          tfs_version: latest-devel
+
+  publish_latest_gpu:
+    executor: default-executor
+    steps:
+      - publish_continer:
+          tfs_version: latest-gpu
+
+  publish_latest_devel_gpu:
+    executor: default-executor
+    steps:
+      - publish_continer:
+          tfs_version: latest-devel-gpu
+
+  publish_1_14:
+    executor: default-executor
+    steps:
+      - publish_continer:
+          tfs_version: 1.14.0
+
+  publish_1_14_devel:
+    executor: default-executor
+    steps:
+      - publish_continer:
+          tfs_version: 1.14.0-devel
+
+  publish_1_14_gpu:
+    executor: default-executor
+    steps:
+      - publish_continer:
+          tfs_version: 1.14.0-gpu
+
+  publish_1_14_devel_gpu:
+    executor: default-executor
+    steps:
+      - publish_continer:
+          tfs_version: 1.14.0-devel-gpu
+
+  publish_1_13:
+    executor: default-executor
+    steps:
+      - publish_continer:
+          tfs_version: 1.13.0
+
+  publish_1_13_devel:
+    executor: default-executor
+    steps:
+      - publish_continer:
+          tfs_version: 1.13.0-devel
+
+  publish_1_13_gpu:
+    executor: default-executor
+    steps:
+      - publish_continer:
+          tfs_version: 1.13.0-gpu
+
+  publish_1_13_devel_gpu:
+    executor: default-executor
+    steps:
+      - publish_continer:
+          tfs_version: 1.13.0-devel-gpu
+
+
+
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build_latest:
+          filters:
+            branches:
+              ignore: master
+
+      - build_latest_devel:
+          filters:
+            branches:
+              ignore: master
+
+      - build_latest_gpu:
+          filters:
+            branches:
+              ignore: master
+
+      - build_latest_devel_gpu:
+          filters:
+            branches:
+              ignore: master
+
+      - build_1_14:
+          filters:
+            branches:
+              ignore: master
+
+      - build_1_14_devel:
+          filters:
+            branches:
+              ignore: master
+
+      - build_1_14_gpu:
+          filters:
+            branches:
+              ignore: master
+
+      - build_1_14_devel_gpu:
+          filters:
+            branches:
+              ignore: master
+
+      - build_1_13:
+          filters:
+            branches:
+              ignore: master
+
+      - build_1_13_devel:
+          filters:
+            branches:
+              ignore: master
+
+      - build_1_13_gpu:
+          filters:
+            branches:
+              ignore: master
+
+      - build_1_13_devel_gpu:
+          filters:
+            branches:
+              ignore: master
+
+
+
+  publish:
+    jobs:
+      - publish_latest:
+        filters:
+          branches:
+            only: master
+      - publish_latest_devel:
+        filters:
+          branches:
+            only: master
+      - publish_latest_gpu:
+        filters:
+          branches:
+            only: master
+      - publish_latest_devel_gpu:
+        filters:
+          branches:
+            only: master
+      - publish_1_14:
+        filters:
+          branches:
+            only: master
+      - publish_1_14_devel:
+        filters:
+          branches:
+            only: master
+      - publish_1_14_gpu:
+        filters:
+          branches:
+            only: master
+      - publish_1_14_devel_gpu:
+        filters:
+          branches:
+            only: master
+      - publish_1_13:
+        filters:
+          branches:
+            only: master
+      - publish_1_13_devel:
+        filters:
+          branches:
+            only: master
+      - publish_1_13_gpu:
+        filters:
+          branches:
+            only: master
+      - publish_1_13_devel_gpu:
+        filters:
+          branches:
+            only: master
+
+
+  publish_daily:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - publish_latest
+      - publish_latest_devel
+      - publish_latest_gpu
+      - publish_latest_devel_gpu
+      - publish_1_14
+      - publish_1_14_devel
+      - publish_1_14_gpu
+      - publish_1_14_devel_gpu
+      - publish_1_13
+      - publish_1_13_devel
+      - publish_1_13_gpu
+      - publish_1_13_devel_gpu
