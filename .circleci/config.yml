@@ -3,7 +3,7 @@ version: 2.1
 executors:
   default-executor:
     docker:
-      - image: circleci/ruby:2.5.1-node-browsers
+      - image: circleci/python:3.6
 
 commands:
   build_continer:
@@ -15,7 +15,7 @@ commands:
     steps:
       - checkout
       - setup_remote_docker
-      - run: docker build -t tfs-fastpi:<< parameters.tfs_version >> --build-arg TFS_VERSION=<< parameters.tfs_version >> --progress plain -f dockerfile .
+      - run: docker build -t tfs-fastpi:<< parameters.tfs_version >> --build-arg TFS_VERSION=<< parameters.tfs_version >> -f dockerfile . | cat
 
   publish_continer:
     description: "Build a new container."
@@ -26,10 +26,10 @@ commands:
     steps:
       - checkout
       - setup_remote_docker
-      - run: docker build -t radaisystems/tfs-fastpi:<< parameters.tfs_version >> --build-arg TFS_VERSION=<< parameters.tfs_version >> --progress plain -f dockerfile .
+      - run: docker build -t radaisystems/tfs-fastpi:<< parameters.tfs_version >> --build-arg TFS_VERSION=<< parameters.tfs_version >> -f dockerfile . | cat
       - run: |
           echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-          docker push radaisystems/tfs-fastpi:<< parameters.tfs_version >>
+          docker push radaisystems/tfs-fastpi:<< parameters.tfs_version >> | cat
 
 
 jobs:
