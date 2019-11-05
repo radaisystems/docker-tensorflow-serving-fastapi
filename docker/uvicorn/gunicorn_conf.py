@@ -7,6 +7,11 @@ workers_per_core_str = os.getenv("WORKERS_PER_CORE", "1")
 web_concurrency_str = os.getenv("WEB_CONCURRENCY", None)
 host = os.getenv("HOST", "0.0.0.0")
 port = os.getenv("PORT", "8080")
+
+REST_API_TIMEOUT = os.getenv("REST_API_TIMOUT", False)
+if REST_API_TIMEOUT:
+    timeout = (int(REST_API_TIMEOUT)/1000)+5
+
 bind_env = os.getenv("BIND", None)
 use_loglevel = os.getenv("LOG_LEVEL", "info")
 if bind_env:
