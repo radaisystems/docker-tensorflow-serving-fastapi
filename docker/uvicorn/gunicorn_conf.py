@@ -10,7 +10,7 @@ port = os.getenv("PORT", "8080")
 
 REST_API_TIMEOUT = os.getenv("REST_API_TIMOUT", False)
 if REST_API_TIMEOUT:
-    timeout = (int(REST_API_TIMEOUT)/1000)+5
+    timeout = int((int(REST_API_TIMEOUT)/1000)+5)
 
 bind_env = os.getenv("BIND", None)
 use_loglevel = os.getenv("LOG_LEVEL", "info")
