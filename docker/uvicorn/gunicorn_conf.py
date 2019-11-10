@@ -8,7 +8,7 @@ web_concurrency_str = os.getenv("WEB_CONCURRENCY", None)
 host = os.getenv("HOST", "0.0.0.0")
 port = os.getenv("PORT", "8080")
 
-REST_API_TIMEOUT = os.getenv("REST_API_TIMOUT", False)
+REST_API_TIMEOUT = os.getenv("REST_API_TIMEOUT", False)
 if REST_API_TIMEOUT:
     timeout = int((int(REST_API_TIMEOUT)/1000)+5)
 
