@@ -4,7 +4,7 @@ FROM tensorflow/serving:${TFS_VERSION}
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 ENV PYTHONPATH=/app
-ENV REST_API_TIMOUT=30000
+ENV REST_API_TIMEOUT=30000
 
 RUN useradd -ms /bin/bash tfs
 
