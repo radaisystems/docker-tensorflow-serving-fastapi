@@ -57,6 +57,30 @@ jobs:
       - build_continer:
           tfs_version: latest-devel-gpu
 
+  build_1_15:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: 1.15.0
+
+  build_1_15_devel:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: 1.15.0-devel
+
+  build_1_15_gpu:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: 1.15.0-gpu
+
+  build_1_15_devel_gpu:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: 1.15.0-devel-gpu
+
   build_1_14:
     executor: default-executor
     steps:
@@ -80,30 +104,6 @@ jobs:
     steps:
       - build_continer:
           tfs_version: 1.14.0-devel-gpu
-
-  build_1_13:
-    executor: default-executor
-    steps:
-      - build_continer:
-          tfs_version: 1.13.0
-
-  build_1_13_devel:
-    executor: default-executor
-    steps:
-      - build_continer:
-          tfs_version: 1.13.0-devel
-
-  build_1_13_gpu:
-    executor: default-executor
-    steps:
-      - build_continer:
-          tfs_version: 1.13.0-gpu
-
-  build_1_13_devel_gpu:
-    executor: default-executor
-    steps:
-      - build_continer:
-          tfs_version: 1.13.0-devel-gpu
 
   publish_latest:
     executor: default-executor
