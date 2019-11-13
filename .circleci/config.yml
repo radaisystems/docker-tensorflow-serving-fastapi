@@ -105,6 +105,30 @@ jobs:
       - build_continer:
           tfs_version: 1.14.0-devel-gpu
 
+  build_1_13:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: 1.13.0
+
+  build_1_13_devel:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: 1.13.0-devel
+
+  build_1_13_gpu:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: 1.13.0-gpu
+
+  build_1_13_devel_gpu:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: 1.13.0-devel-gpu
+
   publish_latest:
     executor: default-executor
     steps:
@@ -128,6 +152,30 @@ jobs:
     steps:
       - publish_continer:
           tfs_version: latest-devel-gpu
+
+  publish_1_15:
+    executor: default-executor
+    steps:
+      - publish_continer:
+          tfs_version: 1.15.0
+
+  publish_1_15_devel:
+    executor: default-executor
+    steps:
+      - publish_continer:
+          tfs_version: 1.15.0-devel
+
+  publish_1_15_gpu:
+    executor: default-executor
+    steps:
+      - publish_continer:
+          tfs_version: 1.15.0-gpu
+
+  publish_1_15_devel_gpu:
+    executor: default-executor
+    steps:
+      - publish_continer:
+          tfs_version: 1.15.0-devel-gpu
 
   publish_1_14:
     executor: default-executor
@@ -153,25 +201,25 @@ jobs:
       - publish_continer:
           tfs_version: 1.14.0-devel-gpu
 
-  publish_1_15:
+  publish_1_13:
     executor: default-executor
     steps:
       - publish_continer:
           tfs_version: 1.13.0
 
-  publish_1_15_devel:
+  publish_1_13_devel:
     executor: default-executor
     steps:
       - publish_continer:
           tfs_version: 1.13.0-devel
 
-  publish_1_15_gpu:
+  publish_1_13_gpu:
     executor: default-executor
     steps:
       - publish_continer:
           tfs_version: 1.13.0-gpu
 
-  publish_1_15_devel_gpu:
+  publish_1_13_devel_gpu:
     executor: default-executor
     steps:
       - publish_continer:
@@ -224,7 +272,6 @@ workflows:
             branches:
               ignore: master
 
-
       - build_1_14:
           filters:
             branches:
@@ -245,6 +292,25 @@ workflows:
             branches:
               ignore: master
 
+      - build_1_13:
+          filters:
+            branches:
+              ignore: master
+
+      - build_1_13_devel:
+          filters:
+            branches:
+              ignore: master
+
+      - build_1_13_gpu:
+          filters:
+            branches:
+              ignore: master
+
+      - build_1_13_devel_gpu:
+          filters:
+            branches:
+              ignore: master
 
 
   publish:
@@ -297,6 +363,22 @@ workflows:
         filters:
           branches:
             only: master
+      - publish_1_13:
+        filters:
+          branches:
+            only: master
+      - publish_1_13_devel:
+        filters:
+          branches:
+            only: master
+      - publish_1_13_gpu:
+        filters:
+          branches:
+            only: master
+      - publish_1_13_devel_gpu:
+        filters:
+          branches:
+            only: master
 
 
   publish_daily:
@@ -320,3 +402,7 @@ workflows:
       - publish_1_14_devel
       - publish_1_14_gpu
       - publish_1_14_devel_gpu
+      - publish_1_13
+      - publish_1_13_devel
+      - publish_1_13_gpu
+      - publish_1_13_devel_gpu
