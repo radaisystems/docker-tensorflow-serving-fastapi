@@ -2,6 +2,7 @@ version: 2.1
 
 executors:
   default-executor:
+    resource_class: small
     docker:
       - image: circleci/python:3.6
 
