@@ -2,6 +2,7 @@ version: 2.1
 
 executors:
   default-executor:
+    resource_class: small
     docker:
       - image: circleci/python:3.6
 
@@ -316,69 +317,69 @@ workflows:
   publish:
     jobs:
       - publish_latest:
-        filters:
-          branches:
-            only: master
+          filters:
+            branches:
+              only: master
       - publish_latest_devel:
-        filters:
-          branches:
-            only: master
+          filters:
+            branches:
+              only: master
       - publish_latest_gpu:
-        filters:
-          branches:
-            only: master
+          filters:
+            branches:
+              only: master
       - publish_latest_devel_gpu:
-        filters:
-          branches:
-            only: master
+          filters:
+            branches:
+              only: master
       - publish_1_15:
-        filters:
-          branches:
-            only: master
+          filters:
+            branches:
+              only: master
       - publish_1_15_devel:
-        filters:
-          branches:
-            only: master
+          filters:
+            branches:
+              only: master
       - publish_1_15_gpu:
-        filters:
-          branches:
-            only: master
+          filters:
+            branches:
+              only: master
       - publish_1_15_devel_gpu:
-        filters:
-          branches:
-            only: master
+          filters:
+            branches:
+              only: master
       - publish_1_14:
-        filters:
-          branches:
-            only: master
+          filters:
+            branches:
+              only: master
       - publish_1_14_devel:
-        filters:
-          branches:
-            only: master
+          filters:
+            branches:
+              only: master
       - publish_1_14_gpu:
-        filters:
-          branches:
-            only: master
+          filters:
+            branches:
+              only: master
       - publish_1_14_devel_gpu:
-        filters:
-          branches:
-            only: master
+          filters:
+            branches:
+              only: master
       - publish_1_13:
-        filters:
-          branches:
-            only: master
+          filters:
+            branches:
+              only: master
       - publish_1_13_devel:
-        filters:
-          branches:
-            only: master
+          filters:
+            branches:
+              only: master
       - publish_1_13_gpu:
-        filters:
-          branches:
-            only: master
+          filters:
+            branches:
+              only: master
       - publish_1_13_devel_gpu:
-        filters:
-          branches:
-            only: master
+          filters:
+            branches:
+              only: master
 
 
   publish_daily:
