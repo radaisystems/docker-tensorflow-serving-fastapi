@@ -10,5 +10,10 @@ services:
       - "8500:8500"
       - "8501:8501"
       - "8080:8080"
+    environment:
+      - "RELOAD=true"
+      - "ENABLE_BATCHING=true"
+      - "NUM_BATCH_THREADS=16"
+      - "MAX_BATCH_SIZE=1"
     #volumes:
     #  - ./build/models:/models
