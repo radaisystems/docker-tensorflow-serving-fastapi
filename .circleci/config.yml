@@ -37,6 +37,18 @@ jobs:
 
   # Build Containers
 
+  build_nightly:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: nightly
+
+  build_nightly_gpu:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: nightly-gpu
+
   build_latest:
     executor: default-executor
     steps:
@@ -184,6 +196,19 @@ jobs:
 
 
   # Publish Containers
+
+
+  publish_nightly:
+    executor: default-executor
+    steps:
+      - publish_continer:
+          tfs_version: nightly
+
+  publish_nightly_gpu:
+    executor: default-executor
+    steps:
+      - publish_continer:
+          tfs_version: nightly-gpu
 
   publish_latest:
     executor: default-executor
@@ -336,6 +361,16 @@ workflows:
 
   build:
     jobs:
+      - build_nightly:
+          filters:
+            branches:
+              ignore: master
+
+      - build_nightly_gpu:
+          filters:
+            branches:
+              ignore: master
+
       - build_latest:
           filters:
             branches:
@@ -448,6 +483,14 @@ workflows:
 
   publish:
     jobs:
+      - publish_nightly:
+          filters:
+            branches:
+              only: master
+      - publish_nightly_gpu:
+          filters:
+            branches:
+              only: master
       - publish_latest:
           filters:
             branches:
