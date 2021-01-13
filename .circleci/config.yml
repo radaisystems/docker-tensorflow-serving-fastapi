@@ -73,6 +73,29 @@ jobs:
       - build_continer:
           tfs_version: latest-devel-gpu
 
+  build_2_4_0:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: 2.4.0
+
+  build_2_4_0_devel:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: 2.4.0-devel
+
+  build_2_4_0_gpu:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: 2.4.0-gpu
+
+  build_2_4_0_devel_gpu:
+    executor: default-executor
+    steps:
+      - build_continer:
+          tfs_version: 2.4.0-devel-gpu
 
   build_2_3_0:
     executor: default-executor
@@ -234,6 +257,30 @@ jobs:
       - publish_continer:
           tfs_version: latest-devel-gpu
 
+
+  publish_2_4_0:
+    executor: default-executor
+    steps:
+      - publish_continer:
+          tfs_version: 2.4.0
+
+  publish_2_4_0_devel:
+    executor: default-executor
+    steps:
+      - publish_continer:
+          tfs_version: 2.4.0-devel
+
+  publish_2_4_0_gpu:
+    executor: default-executor
+    steps:
+      - publish_continer:
+          tfs_version: 2.4.0-gpu
+
+  publish_2_4_0_devel_gpu:
+    executor: default-executor
+    steps:
+      - publish_continer:
+          tfs_version: 2.4.0-devel-gpu
 
   publish_2_3_0:
     executor: default-executor
@@ -507,6 +554,22 @@ workflows:
           filters:
             branches:
               only: master
+      - publish_2_4_0:
+          filters:
+            branches:
+              only: master
+      - publish_2_4_0_devel:
+          filters:
+            branches:
+              only: master
+      - publish_2_4_0_gpu:
+          filters:
+            branches:
+              only: master
+      - publish_2_4_0_devel_gpu:
+          filters:
+            branches:
+              only: master
       - publish_2_3_0:
           filters:
             branches:
@@ -602,6 +665,10 @@ workflows:
       - publish_latest_devel
       - publish_latest_gpu
       - publish_latest_devel_gpu
+      - publish_2_4_0
+      - publish_2_4_0_devel
+      - publish_2_4_0_gpu
+      - publish_2_4_0_devel_gpu
       - publish_2_3_0
       - publish_2_3_0_devel
       - publish_2_3_0_gpu
